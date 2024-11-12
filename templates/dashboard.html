@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Hoş Geldiniz, {{ current_user.first_name }}!</h1>
+
+        {% if current_user.role == 'Müşteri' %}
+            <p>Randevularınızı yönetmek için aşağıdaki bağlantıları kullanabilirsiniz.</p>
+            <a href="{{ url_for('appointment') }}">Randevu Al</a>
+        
+        {% elif current_user.role == 'Berber' %}
+            <p>Gelen randevuları görmek için aşağıdaki bağlantıyı kullanabilirsiniz.</p>
+            <a href="{{ url_for('barber_appointments') }}">Randevuları Görüntüle</a>
+        
+        {% elif current_user.role == 'Admin' %}
+            <p>Admin paneline gitmek için aşağıdaki bağlantıyı kullanabilirsiniz.</p>
+            <a href="{{ url_for('admin_panel') }}">Admin Paneli</a>
+        
+        {% endif %}
+
+        <a href="{{ url_for('logout') }}">Çıkış Yap</a>
+    </div>
+</body>
+</html>

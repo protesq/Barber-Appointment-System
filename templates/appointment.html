@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Randevu Al</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Sol Kolon (Başlık ve Form) -->
+        <div class="form-section">
+            <h1>Randevu Al</h1>
+            <form method="POST" action="{{ url_for('appointment') }}">
+                <label for="barber_id">Berber Seçin:</label>
+                <select name="barber_id" id="barber_id">
+                    {% for barber in barbers %}
+                        <option value="{{ barber.id }}">{{ barber.first_name }} {{ barber.last_name }}</option>
+                    {% endfor %}
+                </select>
+                
+                <label>Hizmet Seçin:</label>
+                <select name="service_type">
+                    {% for barber_id, barber_services in services.items() %}
+                        <optgroup label="Berber {{ barber_id }}">
+                            {% for service in barber_services %}
+                                <option value="{{ service.service_name }}">{{ service.service_name }} - {{ service.price }} TL</option>
+                            {% endfor %}
+                        </optgroup>
+                    {% endfor %}
+                </select>
+                
+                <label for="appointment_date">Tarih ve Saat:</label>
+                <input type="datetime-local" name="appointment_date" id="appointment_date" required>
+                
+                <button type="submit">Randevu Al</button>
+                <a href="{{ url_for('logout') }}" style="text-decoration: none;">
+                    <button type="button">Çıkış Yap</button>
+                </a>
+            </form>
+        </div>
+
+        <!-- Sağ Kolon (Mevcut Randevular) -->
+        <div class="appointment-section">
+            <h2>Mevcut Randevularım</h2>
+            {% if appointments %}
+                <ul>
+                    {% for appointment in appointments %}
+                        <li>
+                            Berber: {{ appointment.barber.first_name }} {{ appointment.barber.last_name }}<br>
+                            Hizmet: {{ appointment.service_type }}<br>
+                            Tarih: {{ appointment.appointment_date }}<br>
+                            Durum: {{ appointment.status }}<br>
+
+                            <!-- İptal Et Button -->
+                            {% if appointment.status != 'İptal Edildi' and appointment.status != 'Tamamlandı' %}
+                                <form action="{{ url_for('cancel_appointment', appointment_id=appointment.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit">İptal Et</button>
+                                </form>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Henüz bir randevunuz yok.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

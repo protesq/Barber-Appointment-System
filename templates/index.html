@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Sayfa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Online Berber Randevu Sistemi</h1>
+        {% if current_user.is_authenticated %}
+            <p>Hoş geldiniz, {{ current_user.first_name }}!</p>
+            <a href="{{ url_for('dashboard') }}">Profilim</a> | 
+            <a href="{{ url_for('logout') }}">Çıkış Yap</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Giriş Yap</a> | 
+            <a href="{{ url_for('register') }}">Kayıt Ol</a>
+        {% endif %}
+    </div>
+</body>
+</html>

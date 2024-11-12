@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>Randevularım</title>
+</head>
+<body>
+    <h1>Randevularım</h1>
+    <table border="1">
+        <tr>
+            <th>Berber ID</th>
+            <th>Randevu Tarihi</th>
+            <th>Hizmet Türü</th>
+            <th>Durum</th>
+        </tr>
+        {% for appointment in appointments %}
+        <tr>
+            <td>{{ appointment.barber_id }}</td>
+            <td>{{ appointment.appointment_date }}</td>
+            <td>{{ appointment.service_type }}</td>
+            <td>{{ appointment.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

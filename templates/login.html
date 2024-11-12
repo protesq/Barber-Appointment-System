@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap</title>
+    <!-- CSS dosyasını eklemek için link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <form method="POST">
+            <h1>Giriş Yap</h1>
+            <input type="email" name="email" placeholder="E-posta" required><br>
+            <input type="password" name="password" placeholder="Şifre" required><br>
+            <button type="submit">Giriş Yap</button>
+        </form>
+        <p>Henüz bir hesabınız yok mu? <a href="{{ url_for('register') }}">Kayıt Ol</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Admin Paneli</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Admin Paneli</h1>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Çıkış Yap</a>
+        </header>
+        
+        <section class="new-barber">
+            <h2>Yeni Berber Ekle</h2>
+            <form action="{{ url_for('add_barber') }}" method="POST">
+                <label for="first_name">Ad:</label>
+                <input type="text" name="first_name" required>
+                
+                <label for="last_name">Soyad:</label>
+                <input type="text" name="last_name" required>
+                
+                <label for="email">E-posta:</label>
+                <input type="email" name="email" required>
+                
+                <label for="password">Şifre:</label>
+                <input type="password" name="password" required>
+                
+                <button type="submit" class="add-btn">Berber Ekle</button>
+            </form>
+        </section>
+        
+        <section class="existing-barbers">
+            <h2>Mevcut Berberler</h2>
+            <ul>
+                {% for barber in barbers %}
+                    <li>
+                        {{ barber.first_name }} {{ barber.last_name }} - {{ barber.email }}
+                        <form action="{{ url_for('delete_barber', barber_id=barber.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="delete-btn" onclick="return confirm('Bu berberi ve tüm verilerini silmek istediğinize emin misiniz?')">Sil</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
