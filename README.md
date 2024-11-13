@@ -5,6 +5,8 @@ Bu proje, kullanıcıların berber randevusu almalarını, mevcut hizmetleri gö
 
 This project is a Flask-based web application that allows users to book barber appointments, view available services, and manage appointments. The app includes different user roles (Customer, Barber, Admin) with specific privileges.
 
+- **Önemli** instance adında bir dosya oluşturup db.sqlite 'ı içine atınız.
+
 ## Özellikler | Features
 
 - **Kullanıcı Kaydı ve Doğrulama**: Şifrelenmiş parolalar ile güvenli kayıt ve giriş.
@@ -28,7 +30,9 @@ This project is a Flask-based web application that allows users to book barber a
 ## Başlarken | Getting Started
 
 ### Gereksinimler | Prerequisites
-
+   
+- **Önemli** instance adında bir dosya oluşturup db.sqlite 'ı içine atınız.
+   
 - **Python 3.x** sisteminizde yüklü olmalıdır.
 - **SQLite** (Varsayılan veritabanı).
 - **Flask, Flask-Login, Flask-Bcrypt, ve Flask-SQLAlchemy** yüklü olmalıdır:
